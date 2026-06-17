@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DigiPro Academy – Master Digital Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0A0F2C;
+    --navy-mid: #111831;
+    --cyan: #00D4FF;
+    --cyan-soft: rgba(0,212,255,0.15);
+    --gold: #FFB547;
+    --white: #F8F9FF;
+    --gray: #6B7A99;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--navy);
+    color:var(--white);
+    overflow-x:hidden;
+  }
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 60px;
+    background:rgba(10,15,44,0.85);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--white);}
+  .logo span{color:var(--cyan);}
+  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links a{
+    color:var(--gray);font-size:.9rem;font-weight:500;text-decoration:none;
+    cursor:pointer;transition:color .2s;
+  }
+  .nav-links a:hover,.nav-links a.active{color:var(--cyan);}
+  .nav-cta{
+    background:var(--cyan);color:var(--navy);
+    border:none;padding:10px 24px;border-radius:6px;
+    font-weight:700;font-size:.88rem;cursor:pointer;
+    transition:opacity .2s;
+  }
+  .nav-cta:hover{opacity:.85;}
+
+  /* ── PAGES ── */
+  .page{display:none;min-height:100vh;padding-top:80px;}
+  .page.active{display:block;}
+
+  /* ── HOME – HERO ── */
+  .hero{
+    position:relative;min-height:92vh;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;overflow:hidden;padding:60px 40px;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(0,212,255,.12) 0%,transparent 70%),
+               radial-gradient(ellipse 40% 40% at 80% 80%,rgba(255,181,71,.07) 0%,transparent 60%),
+               var(--navy);
+  }
+  .hero-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(var(--border) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--border) 1px,transparent 1px);
+    background-size:60px 60px;
+    opacity:.4;
+  }
+  .hero-content{position:relative;z-index:1;max-width:820px;}
+  .badge{
+    display:inline-block;
+    background:var(--cyan-soft);border:1px solid rgba(0,212,255,.3);
+    color:var(--cyan);padding:6px 18px;border-radius:100px;
+    font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .hero h1{
+    font-family:'Syne',sans-serif;font-size:clamp(2.6rem,6vw,5rem);
+    font-weight:800;line-height:1.08;margin-bottom:22px;
+  }
+  .hero h1 em{font-style:normal;color:var(--cyan);}
+  .hero p{color:var(--gray);font-size:1.1rem;line-height:1.7;max-width:560px;margin:0 auto 36px;}
+  .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--cyan);color:var(--navy);
+    padding:14px 36px;border-radius:8px;font-weight:700;font-size:.95rem;
+    cursor:pointer;border:none;transition:transform .2s,opacity .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);opacity:.9;}
+  .btn-outline{
+    background:transparent;color:var(--white);
+    border:1px solid var(--border);
+    padding:14px 36px;border-radius:8px;font-weight:600;font-size:.95rem;
+    cursor:pointer;transition:border-color .2s,color .2s;
+  }
+  .btn-outline:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  /* floating stats */
+  .stats-row{
+    display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
+    margin-top:56px;position:relative;z-index:1;
+  }
+  .stat-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    backdrop-filter:blur(12px);
+    padding:20px 32px;border-radius:14px;text-align:center;
+  }
+  .stat-card .num{
+    font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--cyan);
+  }
+  .stat-card .lbl{color:var(--gray);font-size:.8rem;margin-top:4px;}
+
+  /* ── SECTIONS ── */
+  section{padding:80px 60px;}
+  @media(max-width:768px){section{padding:60px 24px;} nav{padding:16px 20px;} .nav-links{display:none;}}
+  .section-eyebrow{
+    color:var(--cyan);font-size:.75rem;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;
+  }
+  .section-title{
+    font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);
+    font-weight:800;line-height:1.15;margin-bottom:16px;
+  }
+  .section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:560px;}
+
+  /* ── COURSES ── */
+  .courses-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:24px;margin-top:48px;
+  }
+  .course-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:16px;padding:28px;
+    transition:border-color .25s,transform .25s;cursor:pointer;
+  }
+  .course-card:hover{border-color:var(--cyan);transform:translateY(-4px);}
+  .course-icon{
+    width:48px;height:48px;border-radius:12px;
+    background:var(--cyan-soft);display:flex;align-items:center;
+    justify-content:center;font-size:1.4rem;margin-bottom:18px;
+  }
+  .course-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:10px;}
+  .course-card p{color:var(--gray);font-size:.88rem;line-height:1.6;margin-bottom:16px;}
+  .course-tag{
+    display:inline-block;background:rgba(255,181,71,.1);color:var(--gold);
+    border:1px solid rgba(255,181,71,.25);font-size:.72rem;font-weight:600;
+    padding:4px 12px;border-radius:100px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
+  .about-visual{
+    background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(255,181,71,.06));
+    border:1px solid var(--border);border-radius:20px;
+    padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  }
+  .about-fact{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:12px;padding:20px;
+  }
+  .about-fact .n{
+    font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--cyan);
+  }
+  .about-fact .t{color:var(--gray);font-size:.8rem;margin-top:4px;}
+  .about-text p{color:var(--gray);line-height:1.8;margin-bottom:16px;}
+
+  /* ── WHY CHOOSE US ── */
+  .why-bg{background:var(--navy-mid);}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;margin-top:48px;}
+  .why-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:16px;padding:28px;
+    transition:border-color .25s;
+  }
+  .why-card:hover{border-color:var(--cyan);}
+  .why-icon{font-size:2rem;margin-bottom:16px;}
+  .why-card h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px;}
+  .why-card p{color:var(--gray);font-size:.85rem;line-height:1.6;}
+
+  /* ── FORM ── */
+  .form-section{background:var(--navy-mid);}
+  .form-wrap{
+    max-width:720px;margin:48px auto 0;
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:20px;padding:48px;
+  }
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+  .form-group{display:flex;flex-direction:column;gap:8px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-group label{font-size:.85rem;font-weight:600;color:var(--white);}
+  .form-group input,.form-group select,.form-group textarea{
+    background:rgba(255,255,255,.05);border:1px solid var(--border);
+    color:var(--white);padding:12px 16px;border-radius:8px;
+    font-size:.9rem;font-family:'Inter',sans-serif;
+    outline:none;transition:border-color .2s;
+  }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+    border-color:var(--cyan);
+  }
+  .form-group select option{background:var(--navy-mid);color:var(--white);}
+  .interest-group{grid-column:1/-1;}
+  .interest-label{font-size:.85rem;font-weight:600;color:var(--white);margin-bottom:12px;display:block;}
+  .interest-options{display:flex;flex-wrap:wrap;gap:10px;}
+  .interest-chip{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.05);border:1px solid var(--border);
+    border-radius:100px;padding:8px 16px;cursor:pointer;
+    font-size:.83rem;font-weight:500;color:var(--gray);
+    transition:all .2s;user-select:none;
+  }
+  .interest-chip input{display:none;}
+  .interest-chip.checked{
+    background:var(--cyan-soft);border-color:var(--cyan);color:var(--cyan);
+  }
+  .others-input{
+    margin-top:12px;
+    background:rgba(255,255,255,.05);border:1px solid var(--border);
+    color:var(--white);padding:12px 16px;border-radius:8px;
+    font-size:.9rem;font-family:'Inter',sans-serif;
+    outline:none;transition:border-color .2s;width:100%;
+    display:none;
+  }
+  .others-input.visible{display:block;}
+  .others-input:focus{border-color:var(--cyan);}
+  .form-submit{
+    width:100%;background:var(--cyan);color:var(--navy);
+    border:none;padding:14px;border-radius:8px;
+    font-weight:700;font-size:1rem;cursor:pointer;
+    margin-top:8px;transition:opacity .2s;
+  }
+  .form-submit:hover{opacity:.88;}
+  .form-success{
+    display:none;text-align:center;padding:24px;
+    color:var(--cyan);font-size:1.1rem;font-weight:600;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:48px;}
+  .testi-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:16px;padding:28px;
+  }
+  .stars{color:var(--gold);font-size:1rem;margin-bottom:14px;}
+  .testi-card p{color:var(--gray);font-size:.88rem;line-height:1.7;margin-bottom:20px;}
+  .testi-author{display:flex;align-items:center;gap:12px;}
+  .avatar{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--cyan-soft);border:1px solid rgba(0,212,255,.3);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:.9rem;color:var(--cyan);
+  }
+  .testi-author .name{font-weight:600;font-size:.88rem;}
+  .testi-author .role{color:var(--gray);font-size:.78rem;}
+
+  /* ── PORTFOLIO PAGE ── */
+  .portfolio-hero{
+    text-align:center;padding:80px 60px 40px;
+    background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(0,212,255,.1),transparent 70%);
+  }
+  .portfolio-filter{
+    display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:40px 0;
+  }
+  .filter-btn{
+    background:var(--card-bg);border:1px solid var(--border);
+    color:var(--gray);padding:8px 20px;border-radius:100px;
+    cursor:pointer;font-size:.85rem;font-weight:500;
+    transition:all .2s;
+  }
+  .filter-btn.active,.filter-btn:hover{
+    background:var(--cyan-soft);border-color:var(--cyan);color:var(--cyan);
+  }
+  .portfolio-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:28px;padding:0 60px 80px;
+  }
+  @media(max-width:768px){.portfolio-grid{padding:0 24px 60px;}}
+  .portfolio-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:18px;overflow:hidden;
+    transition:transform .25s,border-color .25s;
+  }
+  .portfolio-card:hover{transform:translateY(-6px);border-color:var(--cyan);}
+  .portfolio-thumb{
+    height:180px;display:flex;align-items:center;justify-content:center;
+    font-size:3rem;position:relative;overflow:hidden;
+  }
+  .portfolio-body{padding:24px;}
+  .portfolio-body h3{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;}
+  .portfolio-body p{color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;}
+  .portfolio-meta{display:flex;gap:8px;flex-wrap:wrap;}
+  .meta-tag{
+    background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);
+    color:var(--cyan);font-size:.72rem;font-weight:600;
+    padding:4px 10px;border-radius:100px;
+  }
+  .result-badge{
+    background:rgba(255,181,71,.1);border:1px solid rgba(255,181,71,.25);
+    color:var(--gold);font-size:.75rem;font-weight:700;
+    padding:4px 10px;border-radius:100px;
+  }
+
+  /* ── CONTACT PAGE ── */
+  .contact-layout{
+    display:grid;grid-template-columns:1fr 1.4fr;
+    gap:60px;padding:60px;max-width:1200px;margin:0 auto;
+  }
+  @media(max-width:900px){.contact-layout{grid-template-columns:1fr;padding:40px 24px;}}
+  .contact-info h2{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:16px;}
+  .contact-info p{color:var(--gray);line-height:1.7;margin-bottom:32px;}
+  .contact-detail{display:flex;flex-direction:column;gap:20px;}
+  .c-item{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:12px;padding:18px;
+  }
+  .c-icon{font-size:1.4rem;min-width:32px;}
+  .c-item h4{font-weight:600;font-size:.9rem;margin-bottom:4px;}
+  .c-item p{color:var(--gray);font-size:.85rem;}
+  .contact-form-wrap{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:20px;padding:40px;
+  }
+  .contact-form-wrap h3{
+    font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:28px;
+  }
+  .social-row{display:flex;gap:12px;margin-top:28px;}
+  .soc-btn{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:8px;padding:10px 18px;font-size:.85rem;
+    color:var(--gray);cursor:pointer;transition:all .2s;
+  }
+  .soc-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  /* ── FOOTER ── */
+  footer{
+    background:var(--navy-mid);border-top:1px solid var(--border);
+    padding:60px;
+  }
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;}
+  @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+  @media(max-width:500px){.footer-grid{grid-template-columns:1fr;}}
+  .footer-brand .logo{margin-bottom:16px;display:block;}
+  .footer-brand p{color:var(--gray);font-size:.88rem;line-height:1.7;}
+  footer h5{font-weight:700;margin-bottom:16px;font-size:.9rem;}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  footer ul li a{color:var(--gray);text-decoration:none;font-size:.85rem;cursor:pointer;transition:color .2s;}
+  footer ul li a:hover{color:var(--cyan);}
+  .footer-bottom{
+    border-top:1px solid var(--border);margin-top:48px;padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  }
+  .footer-bottom p{color:var(--gray);font-size:.82rem;}
+  .footer-bottom .logo{font-family:'Syne',sans-serif;font-weight:800;}
+
+  /* ── MISC ── */
+  .divider{height:1px;background:var(--border);margin:0 60px;}
+  .text-cyan{color:var(--cyan);}
+  .mb-0{margin-bottom:0;}
+
+  /* scroll animation */
+  .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s;}
+  .fade-up.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Digi<span>Pro</span> Academy</div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('portfolio')" id="nav-portfolio">Portfolio</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact Us</a></li>
+    <li><a onclick="scrollTo('enroll')">Enroll</a></li>
+  </ul>
+  <button class="nav-cta" onclick="scrollTo('enroll')">Get Started</button>
+</nav>
+
+<!-- ════════ HOME PAGE ════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="badge">🚀 India's Fastest-Growing Digital Academy</div>
+      <h1>Master the Art of<br/><em>Digital Marketing</em></h1>
+      <p>From SEO to performance ads, content to email — build industry-ready skills with mentors who've actually run campaigns that move millions.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollTo('enroll')">Enroll Now — Free Trial</button>
+        <button class="btn-outline" onclick="showPage('portfolio')">See Our Work</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row" style="padding:0 60px 80px;">
+    <div class="stat-card fade-up"><div class="num">12,400+</div><div class="lbl">Students Trained</div></div>
+    <div class="stat-card fade-up"><div class="num">98%</div><div class="lbl">Placement Rate</div></div>
+    <div class="stat-card fade-up"><div class="num">47</div><div class="lbl">Expert Mentors</div></div>
+    <div class="stat-card fade-up"><div class="num">6</div><div class="lbl">Specialisations</div></div>
+  </div>
+
+  <!-- COURSES -->
+  <section id="courses">
+    <div class="section-eyebrow">What We Teach</div>
+    <div class="section-title">6 Disciplines.<br/>One Unstoppable Marketer.</div>
+    <p class="section-sub">Each course is built around real client briefs — you learn by doing, not just watching.</p>
+    <div class="courses-grid">
+      <div class="course-card fade-up">
+        <div class="course-icon">🔍</div>
+        <h3>Search Engine Optimisation (SEO)</h3>
+        <p>Master on-page, off-page & technical SEO. Rank on Google and own organic traffic for life.</p>
+        <span class="course-tag">12 Weeks · Live Classes</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">📈</div>
+        <h3>Performance Marketing</h3>
+        <p>Run profitable Google Ads, Meta Ads & programmatic campaigns. Learn ROAS, LTV & scaling strategy.</p>
+        <span class="course-tag">10 Weeks · Hands-On</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">✍️</div>
+        <h3>Content Marketing</h3>
+        <p>Build editorial strategies, brand voice, and content systems that drive real audience growth.</p>
+        <span class="course-tag">8 Weeks · Portfolio-First</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">📧</div>
+        <h3>Email Marketing</h3>
+        <p>Design automations, drip campaigns & newsletters that turn subscribers into loyal buyers.</p>
+        <span class="course-tag">6 Weeks · Campaign Lab</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">📱</div>
+        <h3>Social Media Marketing</h3>
+        <p>Platform-specific strategies for Instagram, LinkedIn, YouTube & emerging channels.</p>
+        <span class="course-tag">8 Weeks · Creator Track</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">📊</div>
+        <h3>Analytics & Data</h3>
+        <p>GA4, Looker Studio, attribution modelling — turn data into decisions that move the needle.</p>
+        <span class="course-tag">6 Weeks · Analyst Track</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">🎯</div>
+        <h3>Conversion Rate Optimisation (CRO)</h3>
+        <p>Landing page testing, funnel audits & UX psychology to turn more visitors into paying customers.</p>
+        <span class="course-tag">6 Weeks · Lab-Based</span>
+      </div>
+      <div class="course-card fade-up">
+        <div class="course-icon">🤖</div>
+        <h3>AI in Marketing</h3>
+        <p>Use AI tools for content generation, ad copy, audience research & campaign automation at scale.</p>
+        <span class="course-tag">4 Weeks · Tools Workshop</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT US -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-visual fade-up">
+        <div class="about-fact"><div class="n">2018</div><div class="t">Founded</div></div>
+        <div class="about-fact"><div class="n">₹0</div><div class="t">Hidden Fees</div></div>
+        <div class="about-fact"><div class="n">4.9★</div><div class="t">Google Rating</div></div>
+        <div class="about-fact"><div class="n">180+</div><div class="t">Hiring Partners</div></div>
+      </div>
+      <div class="about-text fade-up">
+        <div class="section-eyebrow">About DigiPro Academy</div>
+        <div class="section-title" style="margin-bottom:20px;">We Don't Teach Theory.<br/>We Teach Results.</div>
+        <p>DigiPro Academy was founded in 2018 by two ex-agency directors who were frustrated with outdated digital marketing syllabi. Every course is rebuilt from scratch each year to reflect what top brands actually need in 2024.</p>
+        <p>We embed you inside real client campaigns from week two. By the time you graduate, your portfolio already has live results — not mock projects. That's why 98% of our graduates land roles within 90 days.</p>
+        <p>Our campus spans two cities, Bengaluru and Mumbai, with a fully live online programme serving students across 22 countries.</p>
+        <button class="btn-primary" onclick="showPage('portfolio')" style="margin-top:8px;">View Our Student Work →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-bg" id="why">
+    <div style="text-align:center;margin-bottom:4px;">
+      <div class="section-eyebrow" style="text-align:center;">Why DigiPro?</div>
+      <div class="section-title" style="text-align:center;">What Makes Us Different</div>
+      <p class="section-sub" style="margin:0 auto;">Seven reasons 12,400 students chose us over every other academy.</p>
+    </div>
+    <div class="why-grid" style="margin-top:48px;">
+      <div class="why-card fade-up">
+        <div class="why-icon">🎯</div>
+        <h4>Live Campaign Lab</h4>
+        <p>From week 2, you manage real ad budgets on real client accounts — nothing simulated.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">👨‍🏫</div>
+        <h4>Industry Mentors Only</h4>
+        <p>Every instructor is currently working in the industry, not retired from it. Real playbooks, not textbooks.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">📜</div>
+        <h4>Dual Certification</h4>
+        <p>Receive a DigiPro credential AND a Google / Meta partner certification upon completion.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">💼</div>
+        <h4>Placement Guarantee</h4>
+        <p>We connect you to our 180+ hiring partners. If you don't land a role in 90 days, you study free again.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🔄</div>
+        <h4>Lifetime Access</h4>
+        <p>Marketing changes fast. Every enrolled student gets lifetime access to updated course content.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🌐</div>
+        <h4>Hybrid Learning</h4>
+        <p>Join live from campus in Bengaluru / Mumbai or attend fully online — same curriculum, same mentors.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🤝</div>
+        <h4>Alumni Community</h4>
+        <p>Join 12,000+ graduates in our private Slack — job referrals, collab projects, and weekly AMA sessions.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">💰</div>
+        <h4>Flexible Payment</h4>
+        <p>No-cost EMI, income share agreement (ISA), and need-based scholarships available. No one is left out.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🛠️</div>
+        <h4>Tool Stack Access</h4>
+        <p>Get free or discounted access to premium tools like SEMrush, Ahrefs, HubSpot and Canva Pro for the full duration of your course.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🧑‍💻</div>
+        <h4>1-on-1 Mentorship</h4>
+        <p>Dedicated mentor check-ins every two weeks to review your portfolio, give feedback, and keep you on track to your career goals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testi">
+    <div class="section-eyebrow">Student Stories</div>
+    <div class="section-title">From Classroom to Career</div>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p>"I went from zero marketing knowledge to managing ₹15L/month ad spend at a Series B startup — all within 8 months of graduating DigiPro."</p>
+        <div class="testi-author">
+          <div class="avatar">PS</div>
+          <div><div class="name">Priya Sharma</div><div class="role">Performance Lead, Groww</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p>"The SEO cohort was intense in the best way. I ranked a brand new site to Page 1 for 40+ keywords while still in the programme."</p>
+        <div class="testi-author">
+          <div class="avatar">AK</div>
+          <div><div class="name">Arjun Kulkarni</div><div class="role">SEO Strategist, Razorpay</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p>"DigiPro's email marketing track is unmatched. My first newsletter sequence drove a 34% open rate and ₹4.2L in direct revenue."</p>
+        <div class="testi-author">
+          <div class="avatar">NR</div>
+          <div><div class="name">Neha Rao</div><div class="role">CRM Manager, Nykaa</div></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p>"I joined with zero social media experience. Within 6 months I'd grown a D2C brand's Instagram from 0 to 50K followers and landed a full-time offer before graduation."</p>
+        <div class="testi-author">
+          <div class="avatar">SV</div>
+          <div><div class="name">Sanya Verma</div><div class="role">Social Media Manager, NutriBlend</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ENROLL FORM -->
+  <section class="form-section" id="enroll">
+    <div style="text-align:center;">
+      <div class="section-eyebrow">Start Your Journey</div>
+      <div class="section-title">Register Your Interest</div>
+      <p class="section-sub" style="margin:0 auto 0;">Fill in your details and our counsellors will reach out within 24 hours with a personalised course plan.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px;">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:8px 18px;font-size:.82rem;color:var(--gray);">
+          <span>✅</span> No spam, ever
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:8px 18px;font-size:.82rem;color:var(--gray);">
+          <span>⏱️</span> Takes under 2 minutes
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:8px 18px;font-size:.82rem;color:var(--gray);">
+          <span>📞</span> Free counselling call
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:8px 18px;font-size:.82rem;color:var(--gray);">
+          <span>🔒</span> Your data stays private
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:720px;margin:40px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-size:1.6rem;margin-bottom:8px;">1️⃣</div>
+        <div style="font-weight:700;font-size:.85rem;margin-bottom:6px;">Fill the Form</div>
+        <div style="color:var(--gray);font-size:.78rem;line-height:1.5;">Tell us your background and interest area</div>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-size:1.6rem;margin-bottom:8px;">2️⃣</div>
+        <div style="font-weight:700;font-size:.85rem;margin-bottom:6px;">Get a Callback</div>
+        <div style="color:var(--gray);font-size:.78rem;line-height:1.5;">A counsellor calls within 24 hours</div>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-size:1.6rem;margin-bottom:8px;">3️⃣</div>
+        <div style="font-weight:700;font-size:.85rem;margin-bottom:6px;">Start Learning</div>
+        <div style="color:var(--gray);font-size:.78rem;line-height:1.5;">Pick your batch and begin the course</div>
+      </div>
+    </div>
+
+    <div class="form-wrap">
+      <div id="enroll-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fname">Full Name *</label>
+            <input type="text" id="fname" placeholder="Rahul Mehta"/>
+          </div>
+          <div class="form-group">
+            <label for="fage">Age *</label>
+            <input type="number" id="fage" placeholder="24" min="16" max="60"/>
+          </div>
+          <div class="form-group full">
+            <label for="femail">Email Address *</label>
+            <input type="email" id="femail" placeholder="rahul@example.com"/>
+          </div>
+          <div class="form-group full">
+            <label for="fqual">Highest Qualification *</label>
+            <select id="fqual">
+              <option value="">Select your qualification</option>
+              <option>High School (10th / 12th)</option>
+              <option>Diploma</option>
+              <option>Bachelor's Degree</option>
+              <option>Master's Degree</option>
+              <option>PhD / Doctorate</option>
+              <option>Currently Pursuing</option>
+            </select>
+          </div>
+          <div class="interest-group">
+            <span class="interest-label">Area of Interest * (select all that apply)</span>
+            <div class="interest-options">
+              <label class="interest-chip" id="chip-seo">
+                <input type="checkbox" value="SEO" onchange="toggleChip(this,'chip-seo')"/>🔍 SEO
+              </label>
+              <label class="interest-chip" id="chip-perf">
+                <input type="checkbox" value="Performance Marketing" onchange="toggleChip(this,'chip-perf')"/>📈 Performance Marketing
+              </label>
+              <label class="interest-chip" id="chip-content">
+                <input type="checkbox" value="Content Marketing" onchange="toggleChip(this,'chip-content')"/>✍️ Content Marketing
+              </label>
+              <label class="interest-chip" id="chip-email">
+                <input type="checkbox" value="Email Marketing" onchange="toggleChip(this,'chip-email')"/>📧 Email Marketing
+              </label>
+              <label class="interest-chip" id="chip-others">
+                <input type="checkbox" value="Others" onchange="toggleChip(this,'chip-others');toggleOthers(this)"/>💡 Others
+              </label>
+            </div>
+            <input class="others-input" id="others-text" type="text" placeholder="Tell us your specific interest…"/>
+          </div>
+          <div class="form-group full">
+            <label for="fmsg">Anything else you'd like us to know?</label>
+            <textarea id="fmsg" rows="3" placeholder="Current experience, goals, preferred batch timing…" style="resize:vertical;"></textarea>
+          </div>
+        </div>
+        <button class="form-submit" onclick="submitEnroll()">Submit — Get Your Free Counselling Call →</button>
+        <p style="text-align:center;color:var(--gray);font-size:.78rem;margin-top:14px;">By submitting, you agree to be contacted by DigiPro Academy regarding your enrollment. We never share your data with third parties.</p>
+      </div>
+      <div class="form-success" id="enroll-success">
+        ✅ Thanks! A counsellor will call you within 24 hours.<br/>
+        <span style="color:var(--gray);font-size:.9rem;font-weight:400;">Check your inbox for a confirmation email.</span>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ════════ PORTFOLIO PAGE ════════ -->
+<div class="page" id="page-portfolio">
+
+  <!-- HERO -->
+  <div class="portfolio-hero">
+    <div class="section-eyebrow">Student & Client Work</div>
+    <div class="section-title">Real Campaigns.<br/>Real Results.</div>
+    <p class="section-sub" style="margin:16px auto 0;">Every project below was managed by DigiPro students or faculty for actual brands — not mock exercises. No fabricated case studies. No stock screenshots.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px;">
+      <button class="btn-primary" onclick="document.getElementById('portfolio-grid').scrollIntoView({behavior:'smooth'})">Browse Projects ↓</button>
+      <button class="btn-outline" onclick="scrollTo('enroll')">Start Your Own Campaign</button>
+    </div>
+  </div>
+
+  <!-- IMPACT STATS BANNER -->
+  <div style="background:var(--navy-mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 60px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;max-width:1100px;margin:0 auto;text-align:center;">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);">₹42Cr+</div>
+        <div style="color:var(--gray);font-size:.82rem;margin-top:4px;">Ad Spend Managed</div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);">320+</div>
+        <div style="color:var(--gray);font-size:.82rem;margin-top:4px;">Live Campaigns Run</div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);">85+</div>
+        <div style="color:var(--gray);font-size:.82rem;margin-top:4px;">Brands Served</div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);">4.8x</div>
+        <div style="color:var(--gray);font-size:.82rem;margin-top:4px;">Avg. ROAS Achieved</div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);">1.9M+</div>
+        <div style="color:var(--gray);font-size:.82rem;margin-top:4px;">Organic Sessions Generated</div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--cyan);">96%</div>
+        <div style="color:var(--gray);font-size:.82rem;margin-top:4px;">Client Satisfaction Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE WORK -->
+  <section style="padding:80px 60px 60px;background:var(--navy);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-eyebrow">Our Approach</div>
+      <div class="section-title" style="margin-bottom:12px;">How Every Project Gets Done</div>
+      <p class="section-sub" style="margin-bottom:48px;">Students don't just watch campaigns — they own them, end to end, under expert supervision.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;position:relative;">
+        <!-- connector line -->
+        <div style="position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.3;pointer-events:none;"></div>
+        <div style="text-align:center;padding:0 16px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(0,212,255,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.4rem;">🎯</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Brief & Strategy</div>
+          <p style="color:var(--gray);font-size:.82rem;line-height:1.6;">Students receive a real client brief and build a full marketing strategy before a single rupee is spent.</p>
+        </div>
+        <div style="text-align:center;padding:0 16px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(0,212,255,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.4rem;">⚙️</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Setup & Launch</div>
+          <p style="color:var(--gray);font-size:.82rem;line-height:1.6;">Campaigns, creatives, landing pages and tracking are all built and reviewed by a senior mentor before going live.</p>
+        </div>
+        <div style="text-align:center;padding:0 16px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(0,212,255,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.4rem;">📊</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Optimise & Scale</div>
+          <p style="color:var(--gray);font-size:.82rem;line-height:1.6;">Weekly review calls, A/B tests, and data-driven iterations — students own the numbers, not just the tasks.</p>
+        </div>
+        <div style="text-align:center;padding:0 16px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--cyan-soft);border:1px solid rgba(0,212,255,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.4rem;">📝</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Report & Present</div>
+          <p style="color:var(--gray);font-size:.82rem;line-height:1.6;">A polished case study is added to the student's portfolio — the kind of proof that wins job interviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY -->
+  <div style="background:var(--navy-mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:36px 60px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="color:var(--gray);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Brands Our Students Have Worked With</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;max-width:1000px;margin:0 auto;">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">TechWave India</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">StyleCart</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">FinEdge Wealth</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">ProjectHub</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">NutriBlend</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">SkillBridge</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">CityDental Chain</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">LegalEase</div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 24px;color:var(--gray);font-weight:700;font-size:.9rem;">OrganicNest</div>
+    </div>
+  </div>
+
+  <!-- MY SUMMER TRAINING -->
+  <section style="padding:80px 60px;background:var(--navy);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-eyebrow">Personal Project</div>
+      <div class="section-title" style="margin-bottom:12px;">What I Learned in Summer Training</div>
+      <p class="section-sub" style="margin-bottom:48px;">A hands-on summer training programme where I built real skills across two core disciplines and ran my first live ad campaign.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+        <div class="course-card fade-up">
+          <div class="course-icon">🔍</div>
+          <h3>SEO</h3>
+          <p>Learned on-page and off-page optimisation, keyword research, technical SEO audits, and how to improve search rankings using tools like Google Search Console and Ahrefs.</p>
+          <span class="course-tag">Core Skill Learned</span>
+        </div>
+        <div class="course-card fade-up">
+          <div class="course-icon">📈</div>
+          <h3>Performance Marketing</h3>
+          <p>Understood paid advertising fundamentals — audience targeting, bidding strategies, budget allocation, and how to read campaign performance metrics like CTR and ROAS.</p>
+          <span class="course-tag">Core Skill Learned</span>
+        </div>
+        <div class="course-card fade-up">
+          <div class="course-icon">🎯</div>
+          <h3>Google Ads Campaign</h3>
+          <p>Built and launched my own live Google Ads campaign from scratch — keyword planning, ad copywriting, bid setup, and tracking conversions through Google Analytics.</p>
+          <span class="course-tag">Hands-On Project</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT CARDS -->
+  <section style="padding:60px 60px 20px;">
+    <div class="section-eyebrow">Case Studies</div>
+    <div class="section-title" style="margin-bottom:8px;">Browse Our Work</div>
+    <p class="section-sub" style="margin-bottom:32px;">Filter by discipline to find the campaigns most relevant to you.</p>
+  </section>
+
+  <div class="portfolio-filter">
+    <button class="filter-btn active" onclick="filterPortfolio('all',this)">All Projects</button>
+    <button class="filter-btn" onclick="filterPortfolio('seo',this)">SEO</button>
+    <button class="filter-btn" onclick="filterPortfolio('ppc',this)">Performance</button>
+    <button class="filter-btn" onclick="filterPortfolio('content',this)">Content</button>
+    <button class="filter-btn" onclick="filterPortfolio('email',this)">Email</button>
+    <button class="filter-btn" onclick="filterPortfolio('social',this)">Social</button>
+  </div>
+
+  <div class="portfolio-grid" id="portfolio-grid"></div>
+
+  <!-- DISCIPLINES BREAKDOWN -->
+  <section style="padding:60px;background:var(--navy-mid);border-top:1px solid var(--border);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-eyebrow">What We Specialise In</div>
+      <div class="section-title" style="margin-bottom:40px;">Depth Across Every Channel</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:28px;border-left:3px solid var(--cyan);">
+          <div style="font-size:1.5rem;margin-bottom:12px;">🔍</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Search Engine Optimisation</div>
+          <p style="color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;">Technical audits, link building, Core Web Vitals, pillar-cluster content, local SEO, and international SEO strategy. We've ranked pages in SERPs across 12+ industries.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="meta-tag">Technical SEO</span><span class="meta-tag">Local SEO</span><span class="meta-tag">Link Building</span>
+          </div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:28px;border-left:3px solid var(--gold);">
+          <div style="font-size:1.5rem;margin-bottom:12px;">📈</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Performance Marketing</div>
+          <p style="color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;">Google Ads, Meta Ads, programmatic display, shopping campaigns, and retargeting. Our average ROAS across active campaigns is 4.8x — above the industry benchmark of 2.87x.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="meta-tag">Google Ads</span><span class="meta-tag">Meta Ads</span><span class="meta-tag">Programmatic</span>
+          </div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:28px;border-left:3px solid #a78bfa;">
+          <div style="font-size:1.5rem;margin-bottom:12px;">✍️</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Content Marketing</div>
+          <p style="color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;">Editorial strategy, SEO-driven content, thought leadership, video scripting, and brand voice development. We build systems that produce content at scale without sacrificing quality.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="meta-tag">Editorial</span><span class="meta-tag">Brand Voice</span><span class="meta-tag">Video</span>
+          </div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:28px;border-left:3px solid #34d399;">
+          <div style="font-size:1.5rem;margin-bottom:12px;">📧</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Email & CRM Marketing</div>
+          <p style="color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;">Welcome flows, drip sequences, cart recovery, re-engagement, and broadcast campaigns. Our best-performing sequences achieve open rates above 45% — 2x the industry average.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="meta-tag">Automation</span><span class="meta-tag">Segmentation</span><span class="meta-tag">CRM</span>
+          </div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:28px;border-left:3px solid #fb923c;">
+          <div style="font-size:1.5rem;margin-bottom:12px;">📱</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Social Media Marketing</div>
+          <p style="color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;">Platform strategy, content calendars, Reels and Shorts production, influencer partnerships, and community management. We've grown brand accounts from zero to 50K+ in under 5 months.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="meta-tag">Instagram</span><span class="meta-tag">LinkedIn</span><span class="meta-tag">YouTube</span>
+          </div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:28px;border-left:3px solid #60a5fa;">
+          <div style="font-size:1.5rem;margin-bottom:12px;">📊</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Analytics & Reporting</div>
+          <p style="color:var(--gray);font-size:.85rem;line-height:1.6;margin-bottom:16px;">GA4 setup, Looker Studio dashboards, attribution modelling, cohort analysis, and custom reporting. Every campaign we run is fully instrumented so decisions are data-driven, not guesswork.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="meta-tag">GA4</span><span class="meta-tag">Looker Studio</span><span class="meta-tag">Attribution</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO CTA -->
+  <section style="padding:80px 60px;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,212,255,.09),transparent 70%);">
+    <div class="section-eyebrow">Want Results Like These?</div>
+    <div class="section-title" style="margin-bottom:16px;">Your Campaign Starts Here</div>
+    <p class="section-sub" style="margin:0 auto 36px;">Join a cohort where you don't just learn digital marketing — you practise it on real brands from day one, and leave with a portfolio that proves it.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="scrollTo('enroll')">Enroll & Build Your Portfolio →</button>
+      <button class="btn-outline" onclick="showPage('contact')">Talk to an Advisor</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════ CONTACT PAGE ════════ -->
+<div class="page" id="page-contact">
+  <div style="text-align:center;padding:80px 60px 20px;">
+    <div class="section-eyebrow">Get In Touch</div>
+    <div class="section-title">We'd Love to Hear<br/>From You</div>
+    <p class="section-sub" style="margin:16px auto 0;">Questions about courses, admissions or partnerships — we typically reply within 4 business hours.</p>
+  </div>
+
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div class="contact-detail">
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <h4>Bengaluru Campus</h4>
+            <p>4th Floor, Prestige Tech Park, Marathahalli, Bengaluru – 560 037</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <h4>Mumbai Campus</h4>
+            <p>Level 8, WeWork BKC, G Block, Bandra Kurla Complex, Mumbai – 400 051</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📞</div>
+          <div>
+            <h4>Admissions Helpline</h4>
+            <p>+91 6239128573 (Mon–Sat, 9 AM – 7 PM)</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📧</div>
+          <div>
+            <h4>Email Us</h4>
+            <p>yuvvrajsingh140@gmail.com</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">🕐</div>
+          <div>
+            <h4>Office Hours</h4>
+            <p>Mon–Fri: 9 AM – 8 PM IST<br/>Saturday: 10 AM – 5 PM IST</p>
+          </div>
+        </div>
+      </div>
+      <div class="social-row">
+        <button class="soc-btn">Instagram</button>
+        <button class="soc-btn">LinkedIn</button>
+        <button class="soc-btn">YouTube</button>
+        <button class="soc-btn">Twitter/X</button>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h3>Send Us a Message</h3>
+      <div id="contact-form-inner">
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" placeholder="Your name"/>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" placeholder="your@email.com"/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+91 98765 43210"/>
+          </div>
+          <div class="form-group">
+            <label>Subject *</label>
+            <select>
+              <option value="">Select a topic</option>
+              <option>Course Enquiry</option>
+              <option>Admissions & Fees</option>
+              <option>Corporate Training</option>
+              <option>Hiring Partnership</option>
+              <option>Media / Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea rows="4" placeholder="Write your message here…" style="resize:vertical;"></textarea>
+          </div>
+          <button class="form-submit" onclick="submitContact()">Send Message →</button>
+        </div>
+      </div>
+      <div class="form-success" id="contact-success">
+        ✅ Message received! We'll get back to you within 4 hours.<br/>
+        <span style="color:var(--gray);font-size:.9rem;font-weight:400;">Mon–Sat, 9 AM – 7 PM IST.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section style="padding-top:0;">
+    <div class="section-eyebrow" style="text-align:center;">FAQ</div>
+    <div class="section-title" style="text-align:center;margin-bottom:40px;">Quick Answers</div>
+    <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+      <div class="course-card" style="cursor:default;">
+        <h3 style="margin-bottom:8px;">Do I need prior marketing experience?</h3>
+        <p style="margin:0;">No. Our courses are designed for complete beginners as well as working professionals who want to upskill. We have a fast-track stream if you already have 2+ years of experience.</p>
+      </div>
+      <div class="course-card" style="cursor:default;">
+        <h3 style="margin-bottom:8px;">Are classes live or recorded?</h3>
+        <p style="margin:0;">All sessions are live with a dedicated mentor. Recordings are available within 6 hours for students who miss a class. You also get a curated library of supplementary resources.</p>
+      </div>
+      <div class="course-card" style="cursor:default;">
+        <h3 style="margin-bottom:8px;">What is the course duration & fees?</h3>
+        <p style="margin:0;">Individual specialisations run 6–12 weeks. The flagship Full-Stack Marketer programme is 6 months. Fees range from ₹18,000–₹75,000 depending on the track. EMI and ISA options available.</p>
+      </div>
+      <div class="course-card" style="cursor:default;">
+        <h3 style="margin-bottom:8px;">Is there a placement guarantee?</h3>
+        <p style="margin:0;">Yes. Students who complete all assignments and maintain 80%+ attendance receive our 90-Day Placement Guarantee — you study free again if you don't land a role.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER (shared) -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Digi<span>Pro</span> Academy</span>
+      <p>India's most practice-led digital marketing school. Building the marketers that top brands compete to hire since 2018.</p>
+    </div>
+    <div>
+      <h5>Courses</h5>
+      <ul>
+        <li><a>SEO Mastery</a></li>
+        <li><a>Performance Marketing</a></li>
+        <li><a>Content Strategy</a></li>
+        <li><a>Email Marketing</a></li>
+        <li><a>Social Media</a></li>
+        <li><a>Analytics & Data</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a onclick="scrollTo('about')">About Us</a></li>
+        <li><a onclick="showPage('portfolio')">Portfolio</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+        <li><a>Blog</a></li>
+        <li><a>Press</a></li>
+        <li><a>Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Support</h5>
+      <ul>
+        <li><a>Admissions FAQ</a></li>
+        <li><a>Scholarships</a></li>
+        <li><a>Corporate Training</a></li>
+        <li><a>Hiring Partners</a></li>
+        <li><a>Refund Policy</a></li>
+        <li><a>Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 DigiPro Academy. All rights reserved. Bengaluru · Mumbai · Online.</p>
+    <span class="logo" style="font-size:1rem;">Digi<span>Pro</span></span>
+  </div>
+</footer>
+
+<script>
+// ── PAGE NAVIGATION ──
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('nav-'+name)?.classList.add('active');
+  document.documentElement.scrollTop=0;
+  if(name==='portfolio') renderPortfolio();
+  observeFadeUps();
+}
+
+// ── SCROLL ──
+function scrollTo(id){
+  showPage('home');
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+// ── INTEREST CHIPS ──
+function toggleChip(cb,chipId){
+  document.getElementById(chipId).classList.toggle('checked',cb.checked);
+}
+function toggleOthers(cb){
+  const inp=document.getElementById('others-text');
+  inp.classList.toggle('visible',cb.checked);
+}
+
+// ── FORM SUBMIT ──
+function submitEnroll(){
+  const name=document.getElementById('fname').value.trim();
+  const age=document.getElementById('fage').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  if(!name||!age||!email){alert('Please fill in Name, Age and Email.');return;}
+  document.getElementById('enroll-form').style.display='none';
+  document.getElementById('enroll-success').style.display='block';
+}
+function submitContact(){
+  document.getElementById('contact-form-inner').style.display='none';
+  document.getElementById('contact-success').style.display='block';
+}
+
+// ── PORTFOLIO DATA ──
+const projects=[
+  {cat:'seo',emoji:'🔍',bg:'linear-gradient(135deg,#0a1628,#00d4ff22)',
+   title:'B2B SaaS Organic Growth',client:'TechWave India',
+   desc:'Student team grew organic sessions by 340% in 5 months through technical SEO overhaul and pillar content strategy.',
+   tags:['Technical SEO','Content Clusters','Core Web Vitals'],result:'↑340% Organic Traffic'},
+  {cat:'ppc',emoji:'📈',bg:'linear-gradient(135deg,#1a0a28,#ffb54722)',
+   title:'E-commerce ROAS Scale',client:'StyleCart',
+   desc:'Managed ₹8L/mo Google Shopping & Meta DPA campaigns. Improved ROAS from 1.8x to 5.2x over 90 days.',
+   tags:['Google Shopping','Meta DPA','ROAS Optimisation'],result:'5.2x ROAS'},
+  {cat:'content',emoji:'✍️',bg:'linear-gradient(135deg,#0a2816,#00ff8822)',
+   title:'Thought Leadership Programme',client:'FinEdge Wealth',
+   desc:'Built a 52-piece editorial calendar and LinkedIn strategy that grew brand following by 18,000 in 6 months.',
+   tags:['Editorial Strategy','LinkedIn','Brand Voice'],result:'18K New Followers'},
+  {cat:'email',emoji:'📧',bg:'linear-gradient(135deg,#280a0a,#ff444422)',
+   title:'SaaS Onboarding Sequence',client:'ProjectHub',
+   desc:'12-step drip automation reduced churn by 22% and lifted trial-to-paid conversion from 8% to 19%.',
+   tags:['Drip Automation','Segmentation','A/B Testing'],result:'↑137% Conversions'},
+  {cat:'social',emoji:'📱',bg:'linear-gradient(135deg,#0a2228,#00aff022)',
+   title:'D2C Brand Instagram Launch',client:'NutriBlend',
+   desc:'Zero to 50K followers in 4 months with a Reels-first strategy. Achieved 8.4% avg engagement rate.',
+   tags:['Instagram Reels','UGC Strategy','Influencer Collab'],result:'50K in 4 Months'},
+  {cat:'ppc',emoji:'🎯',bg:'linear-gradient(135deg,#1c1a0a,#ffe50022)',
+   title:'EdTech Lead Generation',client:'SkillBridge',
+   desc:'Reduced cost-per-lead from ₹1,200 to ₹340 using lookalike audiences and optimised landing pages.',
+   tags:['Facebook Ads','CRO','Lookalike Audiences'],result:'₹340 CPL (was ₹1,200)'},
+  {cat:'seo',emoji:'🌐',bg:'linear-gradient(135deg,#0a1828,#0077ff22)',
+   title:'Local SEO Domination',client:'CityDental Chain',
+   desc:'Ranked 23 clinic locations in Google Maps top 3 for high-intent keywords across Bengaluru.',
+   tags:['Local SEO','Google Business','Review Strategy'],result:'Top 3 in 23 Locations'},
+  {cat:'content',emoji:'🎬',bg:'linear-gradient(135deg,#200a28,#cc00ff22)',
+   title:'YouTube SEO & Growth',client:'LegalEase',
+   desc:'Built a YouTube channel from scratch to 1.2L subscribers using keyword research and retention optimisation.',
+   tags:['YouTube SEO','Scripting','Thumbnail Testing'],result:'1.2L Subscribers'},
+  {cat:'email',emoji:'🛒',bg:'linear-gradient(135deg,#0a2018,#00cc5522)',
+   title:'Cart Abandonment Recovery',client:'OrganicNest',
+   desc:'3-step cart abandonment flow with personalised product recommendations recovered 26% of abandoned carts.',
+   tags:['Cart Recovery','Personalisation','SMS+Email'],result:'26% Cart Recovery'},
+];
+
+let activeFilter='all';
+
+function renderPortfolio(filter){
+  if(filter) activeFilter=filter;
+  const grid=document.getElementById('portfolio-grid');
+  const items=projects.filter(p=>activeFilter==='all'||p.cat===activeFilter);
+  grid.innerHTML=items.map(p=>`
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:${p.bg}">${p.emoji}</div>
+      <div class="portfolio-body">
+        <div style="font-size:.72rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">${p.client}</div>
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="portfolio-meta">
+          ${p.tags.map(t=>`<span class="meta-tag">${t}</span>`).join('')}
+          <span class="result-badge">${p.result}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterPortfolio(filter, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPortfolio(filter);
+}
+
+// ── FADE UP OBSERVER ──
+function observeFadeUps(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
+  },{threshold:0.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+}
+
+// init
+renderPortfolio();
+observeFadeUps();
+</script>
+</body>
+</html>
